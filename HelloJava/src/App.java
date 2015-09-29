@@ -13,11 +13,13 @@ public class App {
 		System.out.println("Enter second:");
 		var2 = scanner.nextByte();
 		
-		if( var1 != var2 )
+		if( var1 != var2 ) {
 			while( var1 != var2 ) {
 				System.out.print(var1+" ");
 				var1 += ( var1 < var2 ) ? 1 : -1;
 			}
+			System.out.print(var1+" ");
+		}
 		else
 			System.out.println("Equal values!");
 		

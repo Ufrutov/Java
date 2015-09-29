@@ -1,0 +1,7 @@
+> 24.09.2015 [Arrays]
+	1. Array of temperature of week (all loops),
+		get medium value of temp,
+		show low temp;
+	2. 2 arrays, 1 - count, 2 - price of products,
+		1 loop - show count, price and total price,
+		check if total is great, than 1000 - use discount 20%;

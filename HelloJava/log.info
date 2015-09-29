@@ -1,3 +1,9 @@
+[@] Links
+> http://frolov-lib.ru/programming/javasamples/index.html
+
+
+
+
 // Scanner example
 
 public static void main(String[] args) {
@@ -62,4 +68,55 @@ public static void main(String[] args) {
 	
 	System.out.println("Payment for "+count+" products, with price of "+price+", will be: "+total_price);
 	System.out.println("With "+discount+"% dscount, it will contains: "+final_price);
+}
+
+// From one variable to second, ++
+
+Scanner scanner = new Scanner(System.in);
+		
+byte var1;
+byte var2;
+
+System.out.println("Enter fist:");
+var1 = scanner.nextByte();
+System.out.println("Enter second:");
+var2 = scanner.nextByte();
+
+if( var1 != var2 ) {
+	while( var1 != var2 ) {
+		System.out.print(var1+" ");
+		var1 += ( var1 < var2 ) ? 1 : -1;
+	}
+	System.out.print(var1+" ");
+}
+else
+	System.out.println("Equal values!");
+
+scanner.close();
+
+
+// Count total of all inserted variables
+
+Scanner scanner = new Scanner(System.in);
+		
+float input = 1.0f;
+float total = 0.0f;
+
+System.out.println("Enter number [0: Exit]:");
+
+while (input != 0) {
+	input = 0.0f;
+	input = scanner.nextFloat();
+	total += input;
+}
+
+System.out.println("Total: "+total);
+
+scanner.close();
+
+
+// 
+while( (a>b) ? x >= b : x <=b ) {
+	System.out.print(x);
+	x=(a>b) ? x-1 : x+1;
 }
