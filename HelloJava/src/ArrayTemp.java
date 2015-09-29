@@ -16,8 +16,8 @@ public class ArrayTemp {
 		}
 		float avg = total/temp.length;
 		
-		System.out.println("Avg. Temp is "+avg);
-		System.out.println("Abs. Minus is "+minus);
+		System.out.printf("Avg. Temp is %.2f C\n", avg);
+		System.out.printf("Abs. Minus is %.2f C\n", minus);
 	}
 
 }
