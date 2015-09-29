@@ -23,6 +23,6 @@ public class ArrayClassroom {
 			System.out.println(order[i]);
 		}
 		
-	}
+ 	}
 
 }

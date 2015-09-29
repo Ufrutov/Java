@@ -6,5 +6,6 @@
 		1 loop - show count, price and total price,
 		check if total is great, than 1000 - use discount 20%;
 
-> 29.09.2015 []
+> 29.09.2015 [Arrays]
+	1. ArrayYear - copy positive and negative values to separate values
 	
