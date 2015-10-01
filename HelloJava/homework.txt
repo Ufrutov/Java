@@ -8,4 +8,6 @@
 
 > 29.09.2015 [Arrays]
 	1. ArrayYear - copy positive and negative values to separate values
-	
+
+> 01.10.2015 [Collections]
+	1. ArrayList - copy positive and negative values to separate collections
