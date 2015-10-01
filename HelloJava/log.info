@@ -120,3 +120,49 @@ while( (a>b) ? x >= b : x <=b ) {
 	System.out.print(x);
 	x=(a>b) ? x-1 : x+1;
 }
+
+
+//		Enter name and surname
+//		Show first characters.
+		
+		String name, surname;
+		
+		Scanner in = new Scanner(System.in);
+		
+		System.out.println("Enter You name, please:");
+		
+		name = in.next();
+		
+		System.out.println("Enter You surname, too:");
+		
+		surname = in.next();
+		
+		System.out.println("Hello, "+name.charAt(0)+"."+surname.charAt(0)+".");
+
+		
+// Enter phrase, replace word
+		
+		Scanner in = new Scanner(System.in);
+		
+		String phrase;
+		String word;
+		String replace;
+		
+		System.out.println("Enter phrase:");
+		
+		phrase = in.nextLine();
+		
+		System.out.println("Enter word to replace:");
+		
+		word = in.nextLine();
+		
+		System.out.println("Enter replacement");
+		
+		replace = in.nextLine();
+		
+		if( phrase.indexOf(word) == -1 )
+			System.out.println("[!] Can't search entered word - "+word);
+		else
+			System.out.println("Result: "+phrase.replace(word, replace));
+
+			
