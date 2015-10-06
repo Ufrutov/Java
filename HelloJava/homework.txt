@@ -11,3 +11,5 @@
 
 > 01.10.2015 [Collections]
 	1. ArrayList - copy positive and negative values to separate collections
+	
+> 06.10.2015 
