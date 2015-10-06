@@ -109,5 +109,7 @@ public class PersonList {
 				}
 			}
 		}
+		
+		keyb.close();
 	}
 }

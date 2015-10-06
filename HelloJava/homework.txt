@@ -12,4 +12,8 @@
 > 01.10.2015 [Collections]
 	1. ArrayList - copy positive and negative values to separate collections
 	
-> 06.10.2015 
+> 06.10.2015 [Collections]
+	1. Collections examples/exertitions
+	2. Collection Map - create collection of products with parameters name: price, producer
+		name<String> -> price<Float>, producer<String>
+		Features: add/edit/delete
