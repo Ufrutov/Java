@@ -10,16 +10,17 @@ public class ArrayList_hw {
 		ArrayList<Integer> values = new ArrayList<Integer>(Arrays.asList(0, 1, -2, -3, 4, -5, -6, 7, 8, -9, 10, 11, 12, -13, 14, -15, 16, 17, 18, -19, 20, -21, 22, -23, 24, -25, 26, 27, -28, -29));
 		ArrayList<Integer> great = new ArrayList<Integer>();
 		ArrayList<Integer> less = new ArrayList<Integer>();
-		
+		int i;
 		Iterator<Integer> itr = values.iterator();
 		
 		System.out.println("Original collection ["+values.size()+"]:");
 		while(itr.hasNext()) {
-			System.out.print(itr.next()+" ");
-			if( itr.next() >= 0 )
-				great.add(itr.next());
+			i = itr.next();
+			System.out.print(i+" ");
+			if( i >= 0 )
+				great.add(i);
 			else
-				less.add(itr.next());
+				less.add(i);
 		}
 		
 		itr = great.iterator();
