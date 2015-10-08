@@ -3,7 +3,7 @@ package collections;
 import java.util.HashMap;
 import java.util.Map;
 
-public class HashMap_ex {
+public class HashMap_cw {
 
 	public static void main(String[] args) {
 //		Declare Map in memory
