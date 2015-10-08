@@ -17,3 +17,6 @@
 	2. Collection Map - create collection of products with parameters name: price, producer
 		name<String> -> price<Float>, producer<String>
 		Features: add/edit/delete
+
+> 08.10.2015 [Collections]
+	1. Collections examples/exertitions
