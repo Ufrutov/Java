@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -42,17 +40,23 @@ public class UserCollection_copy {
 			user = new HashMap<String, String>();
 		}
 		
-		people.put("John Dee", new HashMap<String, String>(){{ 
+		people.put("John Dee", new HashMap<String, String>(){
+			private static final long serialVersionUID = 1L;
+		{ 
 			put("id", "1");
 			put("year", "1987");
 			put("phone", "546665415123");
 		}});
-		people.put("Stve Jobs", new HashMap<String, String>(){{ 
+		people.put("Stve Jobs", new HashMap<String, String>(){
+			private static final long serialVersionUID = 1L;
+		{ 
 			put("id", "2");
 			put("year", "1965");
 			put("phone", "5687745513132");
 		}});
-		people.put("Hele Hurper", new HashMap<String, String>(){{ 
+		people.put("Hele Hurper", new HashMap<String, String>(){
+			private static final long serialVersionUID = 1L;
+		{ 
 			put("id", "3");
 			put("year", "1985");
 			put("phone", "45687664354135");
@@ -72,6 +76,8 @@ public class UserCollection_copy {
 			System.out.print("phone: "+people.get(i).get("phone"));
 			System.out.print("\n");
 		}
+		
+		in.close();
 		
 	}
 

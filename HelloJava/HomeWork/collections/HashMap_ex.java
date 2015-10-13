@@ -6,7 +6,7 @@ import java.util.Map;
 public class HashMap_ex {
 
 	public static void main(String[] args) {
-		Map<String, HashMap> products = new HashMap<String, HashMap>();
+		Map<String, HashMap<String, String>> products = new HashMap<String, HashMap<String, String>>();
 		HashMap<String, String> item = new HashMap<String, String>();
 		
 		item.put("Price", "price value 1");

@@ -11,7 +11,7 @@ public class UserCollection {
 	public static void main(String[] args) {
 		// Collection of users: key - name
 		// Params: [0]phone, [1]year, [2]id
-		Map<String, ArrayList> people = new LinkedHashMap<String, ArrayList>();
+		Map<String, ArrayList<String>> people = new LinkedHashMap<String, ArrayList<String>>();
 		ArrayList<String> user = new ArrayList<String>();
 		
 		Scanner in = new Scanner(System.in);
