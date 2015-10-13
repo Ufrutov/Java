@@ -2,8 +2,8 @@
 public class App {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		
+		Arithmetic.add(10, 30);
 	}
 
 }

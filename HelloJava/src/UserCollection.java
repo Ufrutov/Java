@@ -60,6 +60,8 @@ public class UserCollection {
 			System.out.print("\n");
 		}
 		
+		in.close();
+		
 	}
 
 }

@@ -12,7 +12,7 @@ public class UserCollection_copy {
 	public static void main(String[] args) {
 		// Collection of users: key - name
 		// Params: [0]phone, [1]year, [2]id
-		Map<String, Map> people = new LinkedHashMap<String, Map>();
+		Map<String, Map<String, String>> people = new LinkedHashMap<String, Map<String, String>>();
 		Map<String, String> user = new HashMap<String, String>();
 		
 		Scanner in = new Scanner(System.in);
