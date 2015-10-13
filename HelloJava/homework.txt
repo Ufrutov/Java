@@ -22,3 +22,14 @@
 	1. Collections examples/exertitions
 
 > 13.10.2015 [Classes]
+	1. Converter class
+		1) usd > mdl
+		2) mdl > usd
+		
+		Class properties:
+			> rate mdl
+			> rate usd
+		
+		* HashMap property - exchange history;
+		
+	2. Validator class: check negative
