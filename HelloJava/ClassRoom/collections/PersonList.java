@@ -8,7 +8,7 @@ public class PersonList {
 
 	public static void main(String[] args) {
 //		Collection of Strings
-		ArrayList<String> people = new ArrayList<String>();;
+		ArrayList<String> people = new ArrayList<String>();
 //		Scanner
 		Scanner keyb = new Scanner(System.in);
 		String input;
