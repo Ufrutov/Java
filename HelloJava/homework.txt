@@ -33,3 +33,7 @@
 		* HashMap property - exchange history;
 		
 	2. Validator class: check negative
+
+> 15.10.2015 [Classes]
+	1. Extend Restaurant application
+	2. Show total price 
