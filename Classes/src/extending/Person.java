@@ -6,4 +6,8 @@ public class Person {
 	public static byte age = 19;
 	public static String gender = "M";
 	
+	public static void personInfo() {
+		System.out.println(name);
+	}
+	
 }
