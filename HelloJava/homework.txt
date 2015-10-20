@@ -37,3 +37,6 @@
 > 15.10.2015 [Classes]
 	1. Extend Restaurant application
 	2. Show total price 
+
+> 20.10.2015 [Objects]
+	1. Objects intro
