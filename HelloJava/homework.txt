@@ -40,3 +40,6 @@
 
 > 20.10.2015 [Objects]
 	1. Objects intro
+	
+> 22.10.2015 [Objects]
+	1. Menu with objects
