@@ -1,0 +1,20 @@
+*****************
+Try/Catch Exceptions
+
+*****************
+
+[i] stack - LIFO - Last Input First Output 
+
+[try/catch]
+ *	try {
+ *		exec();	
+ *	} catch (Exception error) {
+ *		exec(error);
+ *	}
+[try/catch]
+
+[throw]
+ *
+ *	if( true/false ) throw new Exception("Error message");
+ *
+[throw]
