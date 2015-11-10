@@ -43,7 +43,9 @@ public class HttpApp {
 			Iterator index = list.iterator();
 			
 			while( index.hasNext() ) {
-				System.out.println(index.next());
+				String src = index.next().toString();
+				String[] ext = src.split("\\.");
+				System.out.println(ext[ext.length-1]);
 			}
 			
 			System.out.println("Array size: "+list.size());
@@ -58,6 +60,7 @@ public class HttpApp {
 		        
 		        File f = null;
 		        
+//		        Local path
 	        	f = new File("D:/s_workspace/VanarJava/Java/RegEx/assets/"+time);
 	            
 	            // create
