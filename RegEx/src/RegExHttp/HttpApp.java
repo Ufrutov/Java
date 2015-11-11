@@ -1,12 +1,9 @@
 package RegExHttp;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Iterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -14,7 +11,6 @@ import java.util.regex.Pattern;
 public class HttpApp {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		String content = "";
 		try {
 //			URL address = new URL("https://www.tumblr.com/");
@@ -42,32 +38,25 @@ public class HttpApp {
 			
 			Iterator index = list.iterator();
 			
+			String dir = null;
+			if(list.size() != 0)
+				dir = Util.makeDir();
+			
+			int count = 1;
+			int saved = 0;
+			int failed = 0;
 			while( index.hasNext() ) {
-				String src = index.next().toString();
-				String[] ext = src.split("\\.");
-				System.out.println(ext[ext.length-1]);
+				if(Util.saveImg(index.next().toString(), dir, String.valueOf(count++), list.size()))
+					saved++;
+				else
+					failed++;
 			}
 			
-			System.out.println("Array size: "+list.size());
-			
-			
-	        
-//	        D:\s_workspace\VanarJava\Java\RegEx
-	        try {
-	        	Calendar cal = Calendar.getInstance();
-		        SimpleDateFormat sdf = new SimpleDateFormat("d_M_Y-HH_mm_ss");
-		        String time = sdf.format(cal.getTime());
-		        
-		        File f = null;
-		        
-//		        Local path
-	        	f = new File("D:/s_workspace/VanarJava/Java/RegEx/assets/"+time);
-	            
-	            // create
-	            f.mkdir();
-	        } catch (Exception e) {
-	        	e.printStackTrace();
-	        }
+			System.out.println("------------------------------------------------");
+			System.out.println("Working folder: "+dir);
+			System.out.println("Found images: "+list.size());
+			System.out.println("Success saved: "+saved);
+			System.out.println("Error picture format: "+failed);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
