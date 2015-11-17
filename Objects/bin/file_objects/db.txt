@@ -1,0 +1,3 @@
+name: Diablo; contains: More Pepper!; price: 35.0;
+name: Cheese people; contains: More cheese, I need more cheese!; price: 65.0;
+name: Autumn; contains: Autumn wind, cold water, beautiful sky; price: 30;
