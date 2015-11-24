@@ -19,6 +19,7 @@ import com.jgoodies.forms.layout.RowSpec;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 import java.awt.Insets;
+import javax.swing.JTabbedPane;
 
 
 public class GUIApp {
@@ -62,54 +63,22 @@ public class GUIApp {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setTitle("Person DB");
 		
-		JPanel panel = new JPanel();
-		frame.getContentPane().add(panel, BorderLayout.SOUTH);
+		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		frame.getContentPane().add(tabbedPane, BorderLayout.CENTER);
 		
-		JButton btnNewButton = new JButton("Save person");
-		btnNewButton.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				Person p = new Person(
-					field_fname.getText(),
-					field_lname.getText(),
-					Byte.valueOf( (field_age.getText().length()==0) ? "0" : field_age.getText() ),
-					field_job.getText()
-				);
-				
-//				Validate new Person object
-				if( !p.validateFName() ) {
-					txtrText.setText("[E] Wrong first name input! ("+p.getFname()+")");
-					return; }
-				
-				if( !p.validateLName() ) {
-					txtrText.setText("[E] Wrong last name input! ("+p.getLname()+")");
-					return; }
-				
-				if( !p.validateAge() ) {
-					txtrText.setText("[E] Wrong person age input! ("+p.getAge()+")");
-					return; }
-				
-				if( !p.validateLJob() ) {
-					txtrText.setText("[E] Wrong person job input! ("+p.getJob()+")");
-					return; }
-				
-				txtrText.setText("[S] Success saved "+p.getFname()+" "+p.getLname()+"!");
-				p.save();
-				clearForm();
-			}
-		});
-		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		panel.add(btnNewButton);
+		JPanel panel_3 = new JPanel();
+		tabbedPane.addTab("Add new", null, panel_3, null);
+		panel_3.setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel_1 = new JPanel();
-		frame.getContentPane().add(panel_1, BorderLayout.NORTH);
+		panel_3.add(panel_1, BorderLayout.NORTH);
 		
 		JLabel lblPersonForm = new JLabel("Person form:");
 		lblPersonForm.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		panel_1.add(lblPersonForm);
 		
 		JPanel panel_2 = new JPanel();
-		frame.getContentPane().add(panel_2, BorderLayout.CENTER);
+		panel_3.add(panel_2, BorderLayout.CENTER);
 		panel_2.setLayout(new FormLayout(new ColumnSpec[] {
 				ColumnSpec.decode("right:4dlu"),
 				ColumnSpec.decode("left:max(50dlu;default):grow"),
@@ -168,6 +137,51 @@ public class GUIApp {
 		txtrText.setMargin(new Insets(10, 10, 10, 10));
 		txtrText.setBackground(UIManager.getColor("Panel.background"));
 		panel_2.add(txtrText, "2, 10, 3, 1, fill, fill");
+		
+		JPanel panel = new JPanel();
+		panel_3.add(panel, BorderLayout.SOUTH);
+		
+		JButton btnNewButton = new JButton("Save person");
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				byte age = 0;
+				
+				
+				Person p = new Person(
+					field_fname.getText(),
+					field_lname.getText(),
+					Byte.valueOf( (field_age.getText().length()==0) ? "0" : field_age.getText() ),
+					field_job.getText()
+				);
+				
+//				Validate new Person object
+				if( !p.validateFName() ) {
+					txtrText.setText("[E] Wrong first name input! ("+p.getFname()+")");
+					return; }
+				
+				if( !p.validateLName() ) {
+					txtrText.setText("[E] Wrong last name input! ("+p.getLname()+")");
+					return; }
+				
+				if( !p.validateAge() ) {
+					txtrText.setText("[E] Wrong person age input! ("+p.getAge()+")");
+					return; }
+				
+				if( !p.validateLJob() ) {
+					txtrText.setText("[E] Wrong person job input! ("+p.getJob()+")");
+					return; }
+				
+				txtrText.setText("[S] Success saved "+p.getFname()+" "+p.getLname()+"!");
+				p.save();
+				clearForm();
+			}
+		});
+		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		panel.add(btnNewButton);
+		
+		JPanel panel_4 = new JPanel();
+		tabbedPane.addTab("List", null, panel_4, null);
 	}
 	
 	public void clearForm() {
