@@ -4,6 +4,8 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Person {
 	
@@ -90,5 +92,39 @@ public class Person {
 	
 	public void load() {
 		
+	}
+	
+	public boolean validateFName() {
+		String namePattern = "[A-Z]{1}[a-z]{2,}";
+		Pattern p = Pattern.compile( namePattern );
+		Matcher m = p.matcher(this.fname);
+		
+		if( !m.matches() )
+			return false;
+		return true;
+	}
+	
+	public boolean validateLName() {
+		String namePattern = "[A-Z]{1}[a-z]{2,}";
+		Pattern p = Pattern.compile( namePattern );
+		Matcher m = p.matcher(this.lname);
+		
+		if( !m.matches() )
+			return false;
+		return true;
+	}
+	
+	public boolean validateLJob() {
+//		2 - 30
+		if( this.job.length() < 2 || this.job.length() > 120 )
+			return false;
+		return true;
+	}
+	
+	public boolean validateAge() {
+//		18 - 120
+		if( this.age < 17 || this.age > 120 )
+			return false;
+		return true;		
 	}
 }

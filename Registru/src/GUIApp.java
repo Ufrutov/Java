@@ -1,30 +1,24 @@
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-
 import java.awt.BorderLayout;
-
-import javax.swing.JButton;
-import javax.swing.JLabel;
-
+import java.awt.EventQueue;
 import java.awt.Font;
-
-import javax.swing.BoxLayout;
-import javax.swing.JTextField;
-
-import java.awt.FlowLayout;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
-import com.jgoodies.forms.factories.FormFactory;
-
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.UIManager;
+
+import com.jgoodies.forms.factories.FormFactory;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.RowSpec;
+import javax.swing.border.LineBorder;
+import java.awt.Color;
+import java.awt.Insets;
 
 
 public class GUIApp {
@@ -34,6 +28,7 @@ public class GUIApp {
 	private JTextField field_lname;
 	private JTextField field_age;
 	private JTextField field_job;
+	private JTextArea txtrText;
 
 	/**
 	 * Launch the application.
@@ -74,13 +69,31 @@ public class GUIApp {
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				
 				Person p = new Person(
-						field_fname.getText(),
-						field_lname.getText(),
-						Byte.valueOf( field_age.getText() ),
-						field_job.getText()
-					);
+					field_fname.getText(),
+					field_lname.getText(),
+					Byte.valueOf( (field_age.getText().length()==0) ? "0" : field_age.getText() ),
+					field_job.getText()
+				);
+				
+//				Validate new Person object
+				if( !p.validateFName() ) {
+					txtrText.setText("[E] Wrong first name input! ("+p.getFname()+")");
+					return; }
+				
+				if( !p.validateLName() ) {
+					txtrText.setText("[E] Wrong last name input! ("+p.getLname()+")");
+					return; }
+				
+				if( !p.validateAge() ) {
+					txtrText.setText("[E] Wrong person age input! ("+p.getAge()+")");
+					return; }
+				
+				if( !p.validateLJob() ) {
+					txtrText.setText("[E] Wrong person job input! ("+p.getJob()+")");
+					return; }
+				
+				txtrText.setText("[S] Success saved "+p.getFname()+" "+p.getLname()+"!");
 				p.save();
 				clearForm();
 			}
@@ -99,7 +112,7 @@ public class GUIApp {
 		frame.getContentPane().add(panel_2, BorderLayout.CENTER);
 		panel_2.setLayout(new FormLayout(new ColumnSpec[] {
 				ColumnSpec.decode("right:4dlu"),
-				ColumnSpec.decode("left:max(75dlu;default)"),
+				ColumnSpec.decode("left:max(50dlu;default):grow"),
 				FormFactory.RELATED_GAP_COLSPEC,
 				ColumnSpec.decode("default:grow"),},
 			new RowSpec[] {
@@ -110,7 +123,9 @@ public class GUIApp {
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,
 				FormFactory.RELATED_GAP_ROWSPEC,
-				FormFactory.DEFAULT_ROWSPEC,}));
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("default:grow"),}));
 		
 		JLabel lblNewLabel = new JLabel("First Name");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 11));
@@ -147,6 +162,12 @@ public class GUIApp {
 		field_job.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		panel_2.add(field_job, "4, 8, left, default");
 		field_job.setColumns(10);
+		
+		txtrText = new JTextArea();
+		txtrText.setEditable(false);
+		txtrText.setMargin(new Insets(10, 10, 10, 10));
+		txtrText.setBackground(UIManager.getColor("Panel.background"));
+		panel_2.add(txtrText, "2, 10, 3, 1, fill, fill");
 	}
 	
 	public void clearForm() {

@@ -1,8 +1,7 @@
-id: 1 - John John, 35, Worker
-id: 2 - John John, 36, Worker
-id: 3 - John John, 37, Worker
-id: 4 - John John, 37, Worker
-id: 5 - John John, 38, Worker
-id: 6 - John Dee, 38, worker
-id: 7 - John Dee, 39, worker
-id: 8 - John Dee, 40, worker
+id: 1 - Joh Jon, 0, 
+id: 2 - Joh Dsfsdf, 10, 
+id: 3 - John Sds, 0, 
+id: 4 - John Sds, 10, 
+id: 5 - John Sdssd, 100, 
+id: 6 - John Dee, 19, Job
+id: 7 - Samuel Jackson, 120, Job
