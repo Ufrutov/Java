@@ -143,9 +143,6 @@ public class GUIApp {
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				byte age = 0;
-				
-				
 				Person p = new Person(
 					field_fname.getText(),
 					field_lname.getText(),
