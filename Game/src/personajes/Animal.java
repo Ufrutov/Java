@@ -25,6 +25,7 @@ public class Animal extends Thread {
 			} catch(Exception e) {
 				System.out.println(e);
 			}
+			
 			switch( this.direction ) {
 				case "left":
 					if( this.label.getX() < 0  )
@@ -54,10 +55,10 @@ public class Animal extends Thread {
 		
 		switch( direct ) {
 			case "left":
-				x = (int)(x-(1+Math.random()*10));
+				x = (int)(x-(1+Math.random())*10);
 				break;
 			case "right":
-				x = (int)(x+(1+Math.random()*10));
+				x = (int)(x+(1+Math.random())*10);
 				break;
 		}
 		
