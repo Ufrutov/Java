@@ -26,7 +26,7 @@ public class Dog extends Thread {
 			else
 				food -= food;
 		}
-		System.out.println( this.name + " THE END! Food remained " + food);
+		System.out.println( this.name + " THE END!! Food remained " + food);
 	}
 	
 	public void bark() {
