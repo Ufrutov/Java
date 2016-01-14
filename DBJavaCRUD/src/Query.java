@@ -33,8 +33,9 @@ public class Query {
 			int i = 0;
 			while (rs.next()) {
 				i++;
-				System.out.println(rs.getString("id")+". "+ rs.getString("name") +" | "+ rs.getString("lastname") +" | "+ rs.getString("year") +" | "+ rs.getString("faculty"));
+				System.out.println(i+". ["+rs.getString("id")+"] "+ rs.getString("name") +" | "+ rs.getString("lastname") +" | "+ rs.getString("year") +" | "+ rs.getString("faculty"));
 			}
+			System.out.println("Total number of rows: "+i);
 			if( i == 0 )
 				System.out.println("[E] DB table is empty..");
 		} catch (SQLException e) {
