@@ -9,6 +9,7 @@ public class App {
 		while(true) {
 			System.out.println("\n(1) Create new student;\n"
 					+ "(2) List all students;\n"
+					+ "(3) Delete student by id;\n"
 					+ "(x) Exit;\n"
 					+ "-------------------------------------");
 			
@@ -23,6 +24,11 @@ public class App {
 				case "2":
 					System.out.println("[L] List all db items:");
 					Query.list();
+					break;
+				case "3":
+					System.out.println("[D] Delete row by id:");
+					int id = in.nextInt();
+					Query.delete(id);
 					break;
 				case "x":
 					in.close();

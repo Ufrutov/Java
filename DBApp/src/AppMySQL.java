@@ -8,8 +8,8 @@ public class AppMySQL {
 		
 //		Open connection
 		try {
-			Class.forName("org.sqlite.JDBC");
-			db_link = DriverManager.getConnection("jdbc:sqlite:university.db");
+			Class.forName("com.mysql.jdbc.Driver");
+			db_link = DriverManager.getConnection("jdbc:mysql://localhost/university?user=root");
 			
 //			Create table in db
 //			"CREATE TABLE students ( name VARCHAR(20), lastname VARCHAR(20), year INT, faculty VARCHAR(30) );"
@@ -17,14 +17,15 @@ public class AppMySQL {
 			System.out.println("AppMySQL");
 			
 			String query = "CREATE TABLE IF NOT EXISTS students" +
-					"( name VARCHAR(20)," +
+					"(id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ," +
+					"name VARCHAR(20)," +
 					"lastname VARCHAR(20)," +
 					"year INT," +
 					"faculty VARCHAR(30) );";
 			Statement command = db_link.createStatement();
 			command.executeUpdate(query);
 			
-			query = "INSERT INTO students VALUES ( 'John', 'Travolta', 4, 'Film & Action' )";
+			query = "INSERT INTO students VALUES ( null, 'John', 'Travolta', 4, 'Film & Action' )";
 			command.executeUpdate(query);
 			
 			ResultSet rs = command.executeQuery("SELECT * FROM students");
