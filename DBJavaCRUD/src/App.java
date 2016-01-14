@@ -25,11 +25,14 @@ public class App {
 					Query.list();
 					break;
 				case "x":
+					in.close();
 					Query.stop();
 					return;
 				default:
 					System.out.println("[E] Error input, try again.");
 			}
+			
+			
 		}
 	}
 
