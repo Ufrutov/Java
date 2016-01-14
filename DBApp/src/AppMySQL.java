@@ -14,6 +14,8 @@ public class AppMySQL {
 //			Create table in db
 //			"CREATE TABLE students ( name VARCHAR(20), lastname VARCHAR(20), year INT, faculty VARCHAR(30) );"
 			
+			System.out.println("AppMySQL");
+			
 			String query = "CREATE TABLE IF NOT EXISTS students" +
 					"( name VARCHAR(20)," +
 					"lastname VARCHAR(20)," +

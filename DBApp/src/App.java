@@ -2,7 +2,8 @@ import java.sql.*;
 
 public class App {
 
-	public static void main(String[] args) {
+	public static void main_app() {
+//	public static void main(String[] args) {
 //		Connection object
 		Connection db_link = null;
 		
