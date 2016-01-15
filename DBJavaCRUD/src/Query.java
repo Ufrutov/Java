@@ -11,7 +11,8 @@ public class Query {
 			db_link = DriverManager.getConnection("jdbc:sqlite:university.db");
 			
 			String query = "CREATE TABLE IF NOT EXISTS students" +
-					"( name VARCHAR(20)," +
+					"(id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"+
+					"name VARCHAR(20)," +
 					"lastname VARCHAR(20)," +
 					"year INT," +
 					"faculty VARCHAR(30) );";
@@ -31,8 +32,10 @@ public class Query {
 
 			int i = 0;
 			while (rs.next()) {
-				System.out.println(++i+". "+ rs.getString("name") +" | "+ rs.getString("lastname") +" | "+ rs.getString("year") +" | "+ rs.getString("faculty") + "\n");
+				i++;
+				System.out.println(i+". ["+rs.getString("id")+"] "+ rs.getString("name") +" | "+ rs.getString("lastname") +" | "+ rs.getString("year") +" | "+ rs.getString("faculty"));
 			}
+			System.out.println("Total number of rows: "+i);
 			if( i == 0 )
 				System.out.println("[E] DB table is empty..");
 		} catch (SQLException e) {
@@ -41,10 +44,20 @@ public class Query {
 	}
 	
 	public static void insert(Student p) {
-		String query = String.format("INSERT INTO students VALUES ( '%s', '%s', %d, '%s' )", p.name, p.lastname, p.year, p.faculty);
+		String query = String.format("INSERT INTO students VALUES ( null, '%s', '%s', %d, '%s' )", p.name, p.lastname, p.year, p.faculty);
 
 		try {
 			command.executeUpdate(query);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void delete(int id) {
+		String query = String.format("DELETE FROM students WHERE id = %d", id);
+		try {
+			command.executeUpdate(query);
+			System.out.format("Deleted student with id %d;", id);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
