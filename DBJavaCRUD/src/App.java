@@ -36,10 +36,7 @@ public class App {
 					return;
 				default:
 					System.out.println("[E] Error input, try again.");
-			}
-			
-			
+			}		
 		}
 	}
-
 }
