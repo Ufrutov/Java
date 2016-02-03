@@ -2,8 +2,12 @@ package chat;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class MessageQuery {
 	
@@ -30,7 +34,7 @@ public class MessageQuery {
 	}
 	
 	public static Boolean insert(Message m) {
-		String query = String.format("INSERT INTO msg VALUES ( null, '%s', '%s', %d, '%s' )", m.message, m.date, m.ip);
+		String query = String.format("INSERT INTO msg VALUES ( null, '%s', '%s', '%s' )", m.message, m.date, m.ip);
 
 		try {
 			command.executeUpdate(query);
@@ -49,6 +53,42 @@ public class MessageQuery {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public static JSONArray listJson() {
+		String searchQuery = "SELECT  * FROM msg";
+		
+		JSONArray resultSet 	= new JSONArray(); 
+		JSONObject returnObj 	= new JSONObject();
+		
+		ResultSet cursor;
+		int i = 0;
+		try {
+			cursor = command.executeQuery(searchQuery);
+			while( cursor.next() ) {
+				Message m = new Message(
+						Integer.valueOf(cursor.getString("id")),
+						cursor.getString("message"),
+						cursor.getString("date"),
+						cursor.getString("ip"));
+				try {
+					returnObj.put("id", m.id);
+					returnObj.put("message", m.message);
+					returnObj.put("date", m.date);
+					returnObj.put("ip", m.ip);
+					
+					resultSet.put(returnObj);
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+				i++;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println("Count: "+i);
+		return resultSet;
 	}
 	
 	public static void stop() {

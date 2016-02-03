@@ -13,7 +13,7 @@ function sendMessage() {
 	var message = $("#message"),
 		url = window.location.href.split('#')[0];
 	
-	if( message.length > 0 )
+	if( message.val().length > 0 )
 		$.get( url+"client", { message: message.val(), ip: ip } )
 		.done( function(response) {
 			sendMessageCallback(response)

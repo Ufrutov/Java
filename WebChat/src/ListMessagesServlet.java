@@ -8,20 +8,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import chat.Message;
+import org.json.JSONArray;
+
 import chat.MessageQuery;
 
 /**
- * Servlet implementation class ClientServlet
+ * Servlet implementation class ListMessagesServlet
+ * @param <JSONArray>
  */
-@WebServlet(asyncSupported = true, urlPatterns = { "/client" })
-public class ClientServlet extends HttpServlet {
+@WebServlet("/listmessages")
+public class ListMessagesServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ClientServlet() {
+    public ListMessagesServlet() {
         super();
         MessageQuery.start();
     }
@@ -30,13 +32,9 @@ public class ClientServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("Message: "+request.getParameter("message")+"; ip: "+request.getParameter("ip"));
-		
-		Message msg = new Message(0, request.getParameter("message"), String.valueOf(System.currentTimeMillis() / 1000L), request.getParameter("ip"));
-		MessageQuery.insert(msg);
-		
-		response.getWriter().append("Message inserted: ").append(request.getContextPath());
-		MessageQuery.stop();
+		JSONArray responseJSON = MessageQuery.listJson();
+
+		response.getWriter().append("Served at: ").append(responseJSON.toString());
 	}
 
 	/**
