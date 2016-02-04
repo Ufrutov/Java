@@ -13,23 +13,29 @@ public class MessageQuery {
 	
 	private static Statement command;
 	private static Connection db_link = null;
+	private static Boolean start = false;
+	private static Boolean stop = true;
 	
 	public static void start() {
-		try {
-			Class.forName("org.sqlite.JDBC");
-			db_link = DriverManager.getConnection("jdbc:sqlite:caht.db");
-			
-			String query = "CREATE TABLE IF NOT EXISTS msg" +
-					"(id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"+
-					"message TEXT," +
-					"date VARCHAR(20)," +
-					"ip VARCHAR(20) );";
-			command = db_link.createStatement();
-			command.executeUpdate(query);
-			
-			System.out.println("sqlite.JDBC started!");
-		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
+		if( stop ) {
+			try {
+				Class.forName("org.sqlite.JDBC");
+				db_link = DriverManager.getConnection("jdbc:sqlite:caht.db");
+				
+				String query = "CREATE TABLE IF NOT EXISTS msg" +
+						"(id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"+
+						"message TEXT," +
+						"date VARCHAR(20)," +
+						"ip VARCHAR(20) );";
+				command = db_link.createStatement();
+				command.executeUpdate(query);
+				
+				System.out.println("sqlite.JDBC started!");
+			} catch (ClassNotFoundException | SQLException e) {
+				e.printStackTrace();
+			}
+			start = true;
+			stop = false;
 		}
 	}
 	
@@ -71,6 +77,8 @@ public class MessageQuery {
 						cursor.getString("message"),
 						cursor.getString("date"),
 						cursor.getString("ip"));
+				
+				returnObj = new JSONObject();
 				try {
 					returnObj.put("id", m.id);
 					returnObj.put("message", m.message);
@@ -92,11 +100,15 @@ public class MessageQuery {
 	}
 	
 	public static void stop() {
-		try {
-			command.close();
-			db_link.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
+		if( start ) {
+			try {
+				command.close();
+				db_link.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			start = false;
+			stop = true;
 		}
 		
 	}

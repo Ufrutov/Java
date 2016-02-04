@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.websocket.*;
 
 import chat.Message;
 import chat.MessageQuery;
@@ -35,8 +36,9 @@ public class ClientServlet extends HttpServlet {
 		Message msg = new Message(0, request.getParameter("message"), String.valueOf(System.currentTimeMillis() / 1000L), request.getParameter("ip"));
 		MessageQuery.insert(msg);
 		
-		response.getWriter().append("Message inserted: ").append(request.getContextPath());
-		MessageQuery.stop();
+		response.setHeader("content-type", "application/json");
+		response.getWriter().append("true");
+//		MessageQuery.stop();
 	}
 
 	/**

@@ -33,8 +33,10 @@ public class ListMessagesServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		JSONArray responseJSON = MessageQuery.listJson();
-
-		response.getWriter().append("Served at: ").append(responseJSON.toString());
+		
+		response.setHeader("content-type", "application/json");
+		response.getWriter().append(responseJSON.toString());
+//		MessageQuery.stop();
 	}
 
 	/**
