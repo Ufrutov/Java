@@ -1,48 +1,40 @@
 // Handle click event
-$("#send-message").click( runSend );
-var ip;
-
-function runSend() {
-	if( ip )
-		sendMessage();
-	else
-		getIp( sendMessage );
-}
+$("#send-message").click( sendMessage );
 
 function sendMessage() {
 	var message = $("#message"),
-		url = window.location.href.split('#')[0];
+		name = $("#username");
 	
-	if( message.val().length > 0 )
-		$.get( url+"client", { message: message.val(), ip: ip } )
-		.done( function(response) {
-			sendMessageCallback()
-		});
+	if( message.val().length > 0 && name.val().length > 0 ) {
+		send(JSON.stringify( { message: message.val(), user: name.val() } ));
+		$("#message").val('');
+	}
+	return false;
 }
 
 function sendMessageCallback(response) {
-	$(".direct-chat-messages").append(
-		"<!-- Message to the right -->" +
-        "<div class=\"direct-chat-msg right\">" +
-          "<div class=\"direct-chat-info clearfix\">" +
-            "<span class=\"direct-chat-name pull-right\">Sarah Bullock</span>" +
-            "<span class=\"direct-chat-timestamp pull-left\">23 Jan 2:05 pm</span>"+
-          "</div><!-- /.direct-chat-info -->"+
-          "<img class=\"direct-chat-img\" src=\"AdminLTE-2.3.0/dist/img/user3-128x128.jpg\" alt=\"message user image\"><!-- /.direct-chat-img -->"+
-          "<div class=\"direct-chat-text\">"+
-           ( response ) ? $("#message").val() : response+
-          "</div><!-- /.direct-chat-text -->"+
-        "</div><!-- /.direct-chat-msg -->"
-	);
-	$("#message").val('');
-	console.log(response);
-}
+	var result = JSON.parse(response);
+	if( result.hasOwnProperty( "user" ) ) {
+		var date            = new Date(),
+        	timestamp       = date.getTime();
 
-function getIp( callback ) {
-	$.get('http://jsonip.com', function (res) {
-		ip = res.ip
-		callback.call();
-	});
+		var parsedDate = $.format.date(timestamp, "H:mm:ss dd/MM/yyyy");
+		
+		$(".direct-chat-messages").loadTemplate(
+				$("#chat-message-left"),
+				{ name: result.user, text: result.message, date: parsedDate },
+				{ append: true, complete: function() {
+					console.log("[complete]");
+					var scroll = 0;
+					$(".direct-chat-msg").each(function(i, value){
+						scroll += parseInt($(this).height());
+					});
+					if( scroll > 230 )
+						$('.direct-chat-messages').animate({scrollTop: scroll});
+				} }
+			);
+		console.log(result);
+	}
 }
 
 function openSocket(){
@@ -54,13 +46,7 @@ function openSocket(){
     // Create a new instance of the websocket
     webSocket = new WebSocket("ws://localhost:8080/WebChat/chatsocket");
      
-    /**
-     * Binds functions to the listeners for the websocket.
-     */
     webSocket.onopen = function(event){
-        // For reasons I can't determine, onopen gets called twice
-        // and the first time event.data is undefined.
-        // Leave a comment if you know the answer.
         if(event.data === undefined)
             return;
 
@@ -69,25 +55,25 @@ function openSocket(){
 
     webSocket.onmessage = function(event){
     	console.log(event.data);
-    	sendMessageCallback();
+    	sendMessageCallback(event.data);
     };
 
     webSocket.onclose = function(event){
-    	console.log("Connection closed");
+    	console.warn("Connection closed");
+    	if (window.confirm("Chat connection was closed. Reconnect?")) { 
+    		openSocket();
+		}
     };
 }
 
-function send(){
-    webSocket.send("Send");
+function send(text){
+    webSocket.send(text);
 }
 
 function closeSocket(){
     webSocket.close();
 }
 
-function writeResponse(text){
-	console.log("writeResponse", text);
-}
 var webSocket;
 
 $(document).ready(function() {

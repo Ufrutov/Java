@@ -49,13 +49,18 @@
         float: none;
         margin: 0 auto;
       }
+      .form-inline .form-control,
+      .form-inline .btn {
+      	width: 100%;
+      }
+      
     </style>
   </head>
   <body class="hold-transition skin-blue">
     <div class="wrapper">
       <section class="content">
         <div class="row row-dialog">
-          <div class="col-md-4 chat-dialog">
+          <div class="col-md-6 chat-dialog">
             <!-- DIRECT CHAT WARNING -->
             <div class="box box-warning direct-chat direct-chat-warning">
               <div class="box-header with-border">
@@ -70,29 +75,6 @@
               <div class="box-body">
                 <!-- Conversations are loaded here -->
                 <div class="direct-chat-messages">
-                  <!-- Message. Default to the left -->
-                  <div class="direct-chat-msg">
-                    <div class="direct-chat-info clearfix">
-                      <span class="direct-chat-name pull-left">Alexander Pierce</span>
-                      <span class="direct-chat-timestamp pull-right">23 Jan 2:00 pm</span>
-                    </div><!-- /.direct-chat-info -->
-                    <img class="direct-chat-img" src="AdminLTE-2.3.0/dist/img/user1-128x128.jpg" alt="message user image"><!-- /.direct-chat-img -->
-                    <div class="direct-chat-text">
-                      Is this template really for free? That's unbelievable!
-                    </div><!-- /.direct-chat-text -->
-                  </div><!-- /.direct-chat-msg -->
-
-                  <!-- Message to the right -->
-                  <div class="direct-chat-msg right">
-                    <div class="direct-chat-info clearfix">
-                      <span class="direct-chat-name pull-right">Sarah Bullock</span>
-                      <span class="direct-chat-timestamp pull-left">23 Jan 2:05 pm</span>
-                    </div><!-- /.direct-chat-info -->
-                    <img class="direct-chat-img" src="AdminLTE-2.3.0/dist/img/user3-128x128.jpg" alt="message user image"><!-- /.direct-chat-img -->
-                    <div class="direct-chat-text">
-                      You better believe it!
-                    </div><!-- /.direct-chat-text -->
-                  </div><!-- /.direct-chat-msg -->
                 </div><!--/.direct-chat-messages-->
 
                 <!-- Contacts are loaded here -->
@@ -114,13 +96,18 @@
                 </div><!-- /.direct-chat-pane -->
               </div><!-- /.box-body -->
               <div class="box-footer">
-                <form action="#" method="post">
-                  <div class="input-group">
-                    <input type="text" name="message" placeholder="Type Message ..." class="form-control" id="message" autofocus>
-                    <span class="input-group-btn">
-                      <button type="button" class="btn btn-warning btn-flat" id="send-message">Send</button>
-                    </span>
-                  </div>
+                <form action="#" method="post" class="form-inline">
+                  	<div class="row">
+  						<div class="col-xs-2">
+                  			<input type="text" name="usernmae" placeholder="Your name" class="form-control" id="username" value="Guest">
+                  		</div>
+                  		<div class="col-xs-8">
+                    		<input type="text" name="message" placeholder="Type Message ..." class="form-control" id="message" autofocus>
+                    	</div>
+                    	<div class="col-xs-2">
+                    		<button type="submit" class="btn btn-warning btn-flat" id="send-message">Send</button>
+                    	</div>
+                    </div>
                 </form>
               </div><!-- /.box-footer-->
             </div><!--/.direct-chat -->
@@ -128,6 +115,37 @@
         </div>
       </section>
     </div><!-- ./wrapper -->
+
+	<!-- Javascript templates -->
+	<!-- Chat message align left -->
+	<script type="text/html" id="chat-message-left">
+		<div class="direct-chat-msg">
+	     <div class="direct-chat-info clearfix">
+	       <span class="direct-chat-name pull-left" data-content="name">Alexander Pierce</span>
+	       <span class="direct-chat-timestamp pull-right" data-content="date">23 Jan 2:00 pm</span>
+	     </div><!-- /.direct-chat-info -->
+	     <img class="direct-chat-img" src="AdminLTE-2.3.0/dist/img/user5-128x128.jpg" alt="message user image"><!-- /.direct-chat-img -->
+	     <div class="direct-chat-text" data-content="text">
+	       Is this template really for free? That's unbelievable!
+	     </div><!-- /.direct-chat-text -->
+	   </div><!-- /.direct-chat-msg -->
+	</script>
+
+	
+	<!-- Chat message align right -->
+	<script type="text/html" id="chat-message-rigth">
+		<div class="direct-chat-msg right">
+         <div class="direct-chat-info clearfix">
+           <span class="direct-chat-name pull-right" data-content="name">Sarah Bullock</span>
+           <span class="direct-chat-timestamp pull-left" data-content="date">23 Jan 2:05 pm</span>
+         </div><!-- /.direct-chat-info -->
+         <img class="direct-chat-img" src="AdminLTE-2.3.0/dist/img/user5-128x128.jp" alt="message user image"><!-- /.direct-chat-img -->
+         <div class="direct-chat-text" data-content="text">
+           You better believe it!
+         </div><!-- /.direct-chat-text -->
+       </div><!-- /.direct-chat-msg -->
+    </script>
+	
 
     <!-- jQuery 2.1.4 -->
     <script src="AdminLTE-2.3.0/plugins/jQuery/jQuery-2.1.4.min.js"></script>
@@ -145,6 +163,8 @@
     <script src="AdminLTE-2.3.0/dist/js/app.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="AdminLTE-2.3.0/dist/js/demo.js"></script>
+    <script src="js/lib/jquery.loadTemplate.js"></script>
+    <script src="js/lib/jquery-dateFormat.js"></script>
     <!-- Client Chat logic -->
     <script src="js/client-chat.js"></script>
   </body>

@@ -37,7 +37,7 @@ public class chat {
         sessionUsers.add(session);
         
         try {
-            session.getBasicRemote().sendText("Connection Established");
+            session.getBasicRemote().sendText("{ \"status\": \"open\" }");
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -51,10 +51,9 @@ public class chat {
     public void onMessage(String message, Session session){
         System.out.println("Message from " + session.getId() + ": " + message);
         try {
-//            session.getBasicRemote().sendText(message);
-        	session.getBasicRemote().sendText("Served at web-chat");
         	handleMessage(message, session);
         } catch (IOException ex) {
+        	System.out.println("[onMessage error] "+ex);
             ex.printStackTrace();
         }
     }
@@ -79,6 +78,8 @@ public class chat {
      */
     @OnClose
     public void onClose(Session session){
-        System.out.println("Session " +session.getId()+" has ended");
+    	if( sessionUsers.contains(session) )
+    		sessionUsers.remove(session);
+        System.out.println("Session " +session.getId()+" has ended "+sessionUsers.contains(session));
     }
 }
