@@ -17,7 +17,7 @@ public class Query {
 		
 		try {
 			Class.forName("org.sqlite.JDBC");
-			db_link = DriverManager.getConnection("jdbc:sqlite:/home/student/chat.db");
+			db_link = DriverManager.getConnection("jdbc:sqlite:/db/chat.db");
 			
 			String query = "CREATE TABLE IF NOT EXISTS clients" +
 					"(id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"+
