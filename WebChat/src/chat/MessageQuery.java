@@ -20,7 +20,7 @@ public class MessageQuery {
 		if( stop ) {
 			try {
 				Class.forName("org.sqlite.JDBC");
-				db_link = DriverManager.getConnection("jdbc:sqlite:caht.db");
+				db_link = DriverManager.getConnection("jdbc:sqlite:../../WebChatAdmin/db/chat.db");
 				
 				String query = "CREATE TABLE IF NOT EXISTS msg" +
 						"(id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"+

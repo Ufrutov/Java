@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 public class Query {
 	private static Statement command;
@@ -17,11 +18,11 @@ public class Query {
 		
 		try {
 			Class.forName("org.sqlite.JDBC");
-			db_link = DriverManager.getConnection("jdbc:sqlite:/db/chat.db");
+			db_link = DriverManager.getConnection("jdbc:sqlite:db/chat.db");
 			
 			String query = "CREATE TABLE IF NOT EXISTS clients" +
 					"(id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"+
-					"name VARCHAR(40)," +
+					"name VARCHAR(40) UNIQUE," +
 					"status BOOLEAN," +
 					"first_connect DATE," +
 					"last_connect DATE )";
@@ -65,8 +66,34 @@ public class Query {
 		return online; 
 	}
 	
-	public static Object[] list(String table, int client) {
-		Object[] output = null;
+	public static ArrayList<Client> listOnline() {
+		ArrayList<Client> output = new ArrayList<Client>();
+		
+		ResultSet cursor = Query.list("clients", 0);
+		
+		try {
+			while( cursor.next() ) {
+				output.add(new Client(
+						Integer.valueOf(cursor.getString("id")),
+						cursor.getString("name"),
+						Boolean.valueOf(cursor.getString("status")),
+						cursor.getString("first_connect"),
+						cursor.getString("last_connect")
+					)
+				);
+			}
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return output;
+	}
+	
+	public static ResultSet list(String table, int client) {
 		String query = null;
 		
 		switch (table) {
@@ -78,7 +105,7 @@ public class Query {
 				break;
 		}
 		
-		ResultSet cursor;
+		ResultSet cursor = null;
 		
 		if( query != null )
 			try {
@@ -87,7 +114,7 @@ public class Query {
 				e.printStackTrace();
 			}
 		
-		return output;
+		return cursor;
 	}
 	
 	public static Boolean update(String table, int id, String column, String value) {

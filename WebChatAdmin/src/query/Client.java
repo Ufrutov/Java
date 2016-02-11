@@ -7,10 +7,10 @@ public class Client {
 	public int id;
 	public String name;
 	public Boolean status;
-	public Date first_connect;
-	public Date last_connect;
+	public String first_connect;
+	public String last_connect;
 	
-	public Client(int id, String name, Boolean status, Date first_connect, Date last_connect) {
+	public Client(int id, String name, Boolean status, String first_connect, String last_connect) {
 		super();
 		this.id = id;
 		this.name = name;
